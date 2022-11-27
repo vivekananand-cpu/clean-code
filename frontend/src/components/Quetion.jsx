@@ -1,9 +1,9 @@
 import React from 'react'
 import { isAuthenticated } from '../helper/auth';
-import { addCompletedQuetion } from '../helper/coreApiCalls'
+import { addCompletedQuetion, deleteCompletedQuetion } from '../helper/coreApiCalls'
 
 
-const Quetion = ({ quetion, solved }) => {
+const Quetion = ({ quetion, solved ,reload , setReload}) => {
 
     const { user, token } = isAuthenticated();
 
@@ -42,9 +42,9 @@ const Quetion = ({ quetion, solved }) => {
                                 addCompletedQuetion(user._id, quetion._id, token)
                                     .then(data => {
                                         if (data.error) {
-                                            alert("error occoured")
+                                            alert(data.error)
                                         } else {
-                                            alert('marked')
+                                            alert('Marked Completed')
                                         }
                                     })
                             }} class="w-8 h-8 cursor-pointer text-violet-300 hover:text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
@@ -58,7 +58,19 @@ const Quetion = ({ quetion, solved }) => {
 
                {
                 isAuthenticated() && solved && (
-                    <button className="text-red-500 font-bold rounded-lg border p-3" >Delete</button>
+                    <button
+                        onClick={()=>{ 
+                            deleteCompletedQuetion(user._id,quetion._id,token)
+                            .then(data=>{
+                                if(data.error){
+                                    alert(data.error)
+                                }else{
+                                    alert("Problem deleted successfully");
+                                    setReload(!reload);
+                                }
+                            })
+                        }}
+                     className="text-red-500 font-bold rounded-lg border p-3" >Delete</button>
                 )
                }
 
@@ -68,4 +80,4 @@ const Quetion = ({ quetion, solved }) => {
     )
 }
 
-export default Quetion
+export default Quetion;

@@ -40,6 +40,9 @@ exports.getQuetionsSolvedCount = async (req,res) =>{
         res.json({
             completedCount : user.completedCount
         });
+
+
+
     }catch(err){
         res.status(400).json({
             error:"Something went Wrong"
@@ -49,7 +52,15 @@ exports.getQuetionsSolvedCount = async (req,res) =>{
 
 exports.updateCompletedQuetions = async (req,res) =>{
     try{
-        const user = await User.findByIdAndUpdate({
+            const myUser = await User.findById(req.profile._id);
+            const problems = myUser.completedQuetions;
+            problems.forEach(problem => {
+                if (problem.title === req.quetion.title){
+                   throw new Error("Problem is already completed");
+                }
+            })
+            console.log(".....................................................");
+            const user = await User.findByIdAndUpdate({
             _id:req.profile._id
         },{
             $push : {
@@ -61,11 +72,9 @@ exports.updateCompletedQuetions = async (req,res) =>{
         user.completedCount = user.completedCount + 1;
         await user.save();
         res.json(user);
-        
-
     }catch(err){
         res.json({
-            error:"Something went wrong"
+            error:"Problem is already completed"
         })
     }
 };

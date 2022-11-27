@@ -5,8 +5,6 @@ import Quetion from './Quetion';
 const AllProblems = () => {
     const [quetions,setQuetions] = useState([]);
     
-   
-
     const loadQuetions = () =>{
         getAllQuetions()
         .then(data=>{
