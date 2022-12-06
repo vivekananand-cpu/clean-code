@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { isAuthenticated, signout } from '../helper/auth';
 
 var isActive = false;
-var activeCss = "text-red-800"
+
 const currentTab = (path) => {
 
     if (window.location.pathname === path) {
@@ -18,7 +18,6 @@ const currentTab = (path) => {
 
 const Navbar = () => {
     const history = useNavigate();
-    console.log(window.location.pathname);
 
     return (
         <>
@@ -48,7 +47,7 @@ const Navbar = () => {
                         (<Link style={currentTab('/admin/dashboard')} to='/admin/dashboard'>
                             <div className='flex items-center gap-2 rounded-md hover:bg-gray-100 cursor-pointer p-2'>
                                 <svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                                <p className='font-bold text-gray-500'>Admin Dashboard</p>
+                                <p className={`${isActive ? 'font-bold text-blue-500 text-xl' : 'font-bold text-gray-500'}`}>Admin Dashboard</p>
                             </div>
                         </Link>
                         )

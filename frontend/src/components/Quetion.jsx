@@ -37,7 +37,7 @@ const Quetion = ({ quetion, solved ,reload , setReload}) => {
             <p className='pt-5 hover:shadow-md transition-all duration-300 ease-out  w-[80%] flex justify-between gap-3 border-[1px] m-5 items-center p-3 rounded-lg'>
                 <div className='flex gap-5 items-center w-[45vw] justify-between' >
                     {
-                        isAuthenticated() && !solved && (
+                        isAuthenticated() && user.role === 0 && !solved && (
                             <svg onClick={() => {
                                 addCompletedQuetion(user._id, quetion._id, token)
                                     .then(data => {
@@ -57,7 +57,7 @@ const Quetion = ({ quetion, solved ,reload , setReload}) => {
                 </div>
 
                {
-                isAuthenticated() && solved && (
+                isAuthenticated()  && solved && (
                     <button
                         onClick={()=>{ 
                             deleteCompletedQuetion(user._id,quetion._id,token)

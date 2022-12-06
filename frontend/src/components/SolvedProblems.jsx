@@ -17,7 +17,7 @@ const SolvedProblems = () => {
                 setProblems(data)
             }
         })
-    },[reload]);
+    },[reload, token, user._id]);
 
   return (
     <div className='w-full flex items-center justify-center'>
