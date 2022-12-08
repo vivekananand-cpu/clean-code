@@ -57,7 +57,7 @@ exports.signin = async(req,res)=>{
         res.cookie('token',token,{expire:new Date()+9999});
         //send res to frontend
         const {_id,name,email:userEmail,role,completedQuetions} = existingUser;
-        const solved = completedQuetions.length;
+        
         res.json({
             token,
             user:{
