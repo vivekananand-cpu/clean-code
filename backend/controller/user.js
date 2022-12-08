@@ -59,7 +59,7 @@ exports.updateCompletedQuetions = async (req,res) =>{
                    throw new Error("Problem is already completed");
                 }
             })
-            console.log(".....................................................");
+           
             const user = await User.findByIdAndUpdate({
             _id:req.profile._id
         },{
@@ -69,7 +69,7 @@ exports.updateCompletedQuetions = async (req,res) =>{
         },
         {new : true}
         );
-        user.completedCount = user.completedCount + 1;
+       
         await user.save();
         res.json(user);
     }catch(err){
@@ -94,7 +94,7 @@ exports.deleteCompletedQuetions = async (req,res) =>{
         },
         {new : true}
         );
-        user.completedCount = user.completedCount - 1;
+       
         await user.save();
         res.json(user);
     }catch(err){
@@ -104,3 +104,45 @@ exports.deleteCompletedQuetions = async (req,res) =>{
     }
 }
 
+exports.increasePoints = async (req,res) =>{
+    try{
+        // const user = await User.findByIdAndUpdate(
+        //     {_id:req.profile._id}, 
+        //     {
+        //         $inc : {points : 5}
+        //     },
+        //     {new : true}
+        // );
+        // await user.save();
+        // res.json(user);
+        res.json({msg:"hello"});
+
+    }catch(err){
+        res.json({
+            error : "Something went wrong"
+        })
+    }
+}
+
+exports.decreasePoints = async (req,res) =>{
+    try{
+        const user = await User.findByIdAndUpdate(
+            {_id:req.profile._id}, 
+            {
+                $inc : {points : 5}
+            },
+            {new : true}
+        );
+        await user.save();
+        res.json(user);
+
+    }catch(err){
+        res.json({
+            error : "Something went wrong"
+        })
+    }
+}
+
+exports.test = async (req, res) =>{
+    res.send("hello test")
+}

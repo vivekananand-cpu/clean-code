@@ -8,6 +8,8 @@ import Admin from './user/Admin';
 import User from './user/User';
 import AdminRoute from './auth/AdminRoute';
 import UserRoute from './auth/UserRoute';
+import CreateDifficulties from './components/CreateDifficulties';
+import AddProblem from './components/AddProblem';
 
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/admin/dashboard" element={<AdminRoute Child={Admin} />} />
+        <Route path="/admin/difficulties" element={<AdminRoute Child={CreateDifficulties} />} />
+        <Route path="/admin/add" element={<AdminRoute Child={AddProblem} />} />
         <Route path="/user/solved" element={<UserRoute Child={User} />} />
       </Routes>
     </div>

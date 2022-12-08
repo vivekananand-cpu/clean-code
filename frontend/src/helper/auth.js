@@ -1,6 +1,6 @@
 const API = 'http://localhost:5000/api';
 
-export const signup = (user) =>{
+export const signUp = (user) =>{
     return fetch(`${API}/signup`,{
         method : "POST",
         headers : {
