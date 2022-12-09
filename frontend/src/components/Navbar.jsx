@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { isAuthenticated, signout } from "../helper/auth";
+import { getAllQuetions, getSolvedQuetions } from "../helper/coreApiCalls";
 
 var isActive = false;
 
@@ -13,9 +15,42 @@ const currentTab = (path) => {
 };
 
 const Navbar = () => {
+  const [allProblems,setAllProblems] = useState([]);
+  const [solvedProblems,setSolvedProblems] = useState([]);
+
   const history = useNavigate();
-  const {user} = isAuthenticated();
-  console.log(user)
+  const {user , token} = isAuthenticated();
+
+  const getAll = () =>{
+    getAllQuetions()
+    .then((data=>{
+      if(data.error){
+        alert(data.error);
+      }else{
+        setAllProblems(data);
+      }
+    }))
+  };
+
+  const getSolved = () =>{
+    getSolvedQuetions(user._id,token)
+    .then((data=>{
+      if(data.error){
+        alert(data.error);
+      }else{
+        setSolvedProblems(data);
+      }
+    }))
+  };
+
+  useEffect(()=>{
+    getAll();
+    getSolved();
+  },[]);
+
+  console.log('in navbar',allProblems,solvedProblems);
+ 
+ 
 
   return (
     <>
@@ -123,7 +158,7 @@ const Navbar = () => {
         <div className="flex items-center gap-5 pr-5">
           {isAuthenticated() && isAuthenticated().user.role === 0 && (
             <div className="flex h-15 w-15 rounded-full p-2 border-[2px] hover:scale-105 border-violet-400 items-center cursor-pointer transtion-transform duration-100 ease-out">
-              <p className="font-bold text-xl text-violet-700 ">10 / 150</p>
+              <p className="font-bold text-xl text-violet-700 ">{solvedProblems.length} / {allProblems.length}</p>
             </div>
           )}
           {!isAuthenticated() && (
