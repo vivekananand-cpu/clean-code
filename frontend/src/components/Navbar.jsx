@@ -44,11 +44,14 @@ const Navbar = () => {
   };
 
   useEffect(()=>{
-    getAll();
-    getSolved();
+    if(isAuthenticated()){
+      getAll();
+      getSolved();
+    }
+   
   },[]);
 
-  console.log('in navbar',allProblems,solvedProblems);
+  
  
  
 
