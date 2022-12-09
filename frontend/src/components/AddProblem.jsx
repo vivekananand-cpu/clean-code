@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { isAuthenticated } from "../helper/auth";
 import { addProblem, fetchDifficulties } from "../helper/coreApiCalls";
 import Navbar from "./Navbar";
@@ -9,6 +10,7 @@ const AddProblem = () => {
     const [difficulty,setDifficulty] = useState('');
     const [url,setUrl] = useState('');
     const [difficulties,setDifficulties] = useState([]);
+  
 
     const {user,token} = isAuthenticated();
 
@@ -21,12 +23,15 @@ const AddProblem = () => {
                 setDifficulties(data);
             }
         })
-    }
+    };
+
+   
 
     useEffect(()=>{
         getDifficulties();
     },[])
   return (
+    <>
     <div className="h-screen">
       <Navbar />
       <h1 className="font-bold text-xl text-gray-500 text-center mt-5">Add a Problem</h1>
@@ -77,6 +82,8 @@ const AddProblem = () => {
                     setTitle("");
                     setUrl("");
                     alert("Problem added successfully !")
+                   
+                    
                 }
             })
           }} className="bg-green-500 p-2 rounded-md text-white mt-5">Add</button>
@@ -85,6 +92,7 @@ const AddProblem = () => {
       </div>
      
     </div>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Navigate } from 'react-router-dom';
 import { isAuthenticated } from '../helper/auth';
 import { addCompletedQuetion, deleteCompletedQuetion } from '../helper/coreApiCalls'
 
@@ -6,6 +7,7 @@ import { addCompletedQuetion, deleteCompletedQuetion } from '../helper/coreApiCa
 const Quetion = ({ quetion, solved ,reload , setReload}) => {
 
     const { user, token } = isAuthenticated();
+    const [redirect,setRedirect] = useState(false);
 
     const setDifficulty = (difficultyId) => {
         if (difficultyId === '6356152e9184e98272f9906e') {
@@ -29,10 +31,17 @@ const Quetion = ({ quetion, solved ,reload , setReload}) => {
         else {
             return "text-red-500 font-bold w-[100px] text-center h-[50px] p-3 rounded-full border-[1px]"
         }
-    }
+    };
+
+    const performRedirect = () =>{
+        if(redirect){
+          return <Navigate to='/user/solved' />
+        }
+      }
 
 
     return (
+        <>{ performRedirect()}
         <div className=' flex items-center justify-center'>
             <p className='pt-5 hover:shadow-md transition-all duration-300 ease-out  w-[80%] flex justify-between gap-3 border-[1px] m-5 items-center p-3 rounded-lg'>
                 <div className='flex gap-5 items-center w-[45vw] justify-between' >
@@ -44,6 +53,7 @@ const Quetion = ({ quetion, solved ,reload , setReload}) => {
                                         if (data.error) {
                                             alert(data.error)
                                         } else {
+                                            setRedirect(true);
                                             alert('Marked Completed');
                                         }
                                     })
@@ -76,7 +86,7 @@ const Quetion = ({ quetion, solved ,reload , setReload}) => {
 
             </p>
         </div>
-
+        </>
     )
 }
 

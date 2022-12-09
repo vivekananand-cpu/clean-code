@@ -26,12 +26,12 @@ const AllProblems = () => {
   return (
     <>
      {
-        loading && (
+        loading ? (
             <div className="flex items-center justify-center">
             <img src="https://www.icegif.com/wp-content/uploads/loading-icegif-1.gif" alt="" />
         </div>
-        )
-      }
+        ) : (
+
     <div className='w-full flex items-center justify-center'>
        <div className='w-screen'>
        {
@@ -42,6 +42,8 @@ const AllProblems = () => {
 
        </div>
     </div>
+        )
+      }
     </>
   )
 }
