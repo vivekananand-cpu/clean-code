@@ -25,6 +25,8 @@ const SolvedProblems = () => {
        
     },[reload, token, user._id]);
 
+  
+
   return (
     <>
       {
@@ -37,6 +39,7 @@ const SolvedProblems = () => {
     <div className='w-full flex items-center justify-center'>
        
        <div className='w-screen'>
+       
        {
             problems.map((quetion)=>(
                 <Quetion  key ={quetion._id} solved ={true} quetion = {quetion} reload = {reload} setReload = {setReload} />
