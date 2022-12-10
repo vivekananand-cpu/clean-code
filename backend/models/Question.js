@@ -26,7 +26,8 @@ const QuestionSchema = new mongoose.Schema({
         type : Boolean,
         default : false
     },
-    completedBy : [User]
+    completedBy : [User],
+    platform : String
     
 });
 
