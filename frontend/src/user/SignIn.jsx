@@ -9,12 +9,11 @@ const SignIn = () => {
   const [values,setValues] = useState({
     email : "",
     password : "",
-    error : "",
     loading : false,
     didRedirect : false
   });
 
-  const {email,password,error,success,didRedirect} = values;
+  const {email,password,didRedirect} = values;
   const {user} = isAuthenticated();
 
   const handleChange = name => event =>{
@@ -28,6 +27,7 @@ const SignIn = () => {
     .then(data =>{
       if(data.error){
         setValues({...values,error:data.error});
+        alert(data.error);
       }else{
        authenticate(data,()=>{
         setValues({

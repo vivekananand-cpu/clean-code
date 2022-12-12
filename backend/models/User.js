@@ -35,7 +35,7 @@ const UserSchema = new mongoose.Schema({
         trim : true
     },
     completedQuetions : [Question],
-    completedCount : {
+    points : { 
         type : Number,
         default : 0
     }

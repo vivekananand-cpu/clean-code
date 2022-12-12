@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar';
 import Base from '../core/Base';
-import { signup } from '../helper/auth';
+import { signUp } from '../helper/auth';
 
 
 const Signup = () => {
@@ -21,10 +21,11 @@ const Signup = () => {
 
   const onSubmit = (e) =>{
     e.preventDefault();
-    signup({name,email,password})
+    signUp({name,email,password})
     .then(data =>{
       if(data.error){
         setValues({...values,error:data.error});
+        alert(data.error);
       }else{
         setValues({
           ...values,
@@ -33,7 +34,8 @@ const Signup = () => {
           password : "",
           error : "",
           success : true
-        })
+        });
+        alert('Signed Up Successfully');
       }
     })
   }
@@ -59,7 +61,7 @@ const Signup = () => {
           </div>
         </form>
       </div>
-     
+
     </>
   )
 
