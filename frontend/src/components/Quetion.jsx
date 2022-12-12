@@ -78,8 +78,8 @@ const Quetion = ({ quetion, solved, reload, setReload }) => {
             >
               {quetion.title}
             </a>
-            <p className={`${setDcss(setDifficulty(quetion.difficulty))}`}>
-              <p>{setDifficulty(quetion.difficulty)}</p>
+            <p className={`${solved ? setDcss(setDifficulty(quetion.difficulty)) :  setDcss(setDifficulty(quetion.difficulty._id))}`}>
+              <p>{solved ? setDifficulty(quetion.difficulty) : setDifficulty(quetion.difficulty._id)}</p>
             </p>
           </div>
 

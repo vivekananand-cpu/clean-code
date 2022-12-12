@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Navigate } from "react-router-dom";
 import { isAuthenticated } from "../helper/auth";
 import { addProblem, fetchDifficulties } from "../helper/coreApiCalls";
 import Navbar from "./Navbar";

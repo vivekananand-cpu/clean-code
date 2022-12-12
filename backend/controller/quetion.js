@@ -25,7 +25,7 @@ exports.addQuetion = async (req,res) =>{
 
 exports.getQuetionById = async(req,res,next,qId) =>{
     try{
-        const quetion = await Question.findById(qId);
+        const quetion = await Question.findById(qId).populate('difficulty');
         if(!quetion){
             res.status(400).json({
                 error:"Quetion not Found"
@@ -63,7 +63,7 @@ exports.updateCompletedBy = async(req,res) =>{
 };
 exports.getAllQuetions = async (req,res) =>{
     try{
-        const quetions = await Question.find();
+        const quetions = await Question.find().populate('difficulty');
         res.json(quetions);
     }catch(err){
         res.status(400).json({

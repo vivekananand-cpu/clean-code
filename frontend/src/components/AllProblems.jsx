@@ -17,7 +17,6 @@ const currentTab = (path) => {
 const AllProblems = () => {
   const [quetions, setQuetions] = useState([]);
   const [query, setQuery] = useState("");
-  const [diff, setDifficulty] = useState("");
   const [loading, setLoading] = useState(false);
 
   const filterdItems = useMemo(() => {
@@ -28,19 +27,19 @@ const AllProblems = () => {
 
   const easyQuetions = useMemo(() => {
     return  filterdItems.filter((quetion)=>{
-      return quetion.difficulty === "6356152e9184e98272f9906e"
+      return quetion.difficulty.type === "Easy"
     })
   },[filterdItems]);
 
   const mediumQuetions = useMemo(() => {
     return  filterdItems.filter((quetion)=>{
-      return quetion.difficulty === "635615679184e98272f99071"
+      return quetion.difficulty.type === "Medium"
     })
   },[filterdItems]);
 
   const hardQuetions = useMemo(() => {
     return  filterdItems.filter((quetion)=>{
-      return quetion.difficulty === "635615729184e98272f99074"
+      return quetion.difficulty.type === "Hard"
     })
   },[filterdItems]);
 
@@ -60,6 +59,7 @@ const AllProblems = () => {
   useEffect(() => {
     loadQuetions();
   }, []);
+
   return (
     <>
       {loading ? (
