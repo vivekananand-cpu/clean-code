@@ -57,7 +57,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex items-center justify-between p-3 border-b-[1px] ">
+      <div className="flex  sticky top-0 bg-white items-center justify-between p-3 border-b-[1px] ">
         <Link style={currentTab("/")} to="/">
           <div className="">
             <p

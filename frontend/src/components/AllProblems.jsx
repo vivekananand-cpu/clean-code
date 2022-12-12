@@ -1,12 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { getAllQuetions } from "../helper/coreApiCalls";
 import Quetion from "./Quetion";
 
+let active = false;
+let activeCss = "border rounded-full w-[100px] p-2 text-center text-white bg-violet-500 font-bold flex items-center justify-center";
+
+const currentTab = (path) => {
+  if (window.location.pathname === path) {
+    active = true;
+  } else {
+    active = false;
+  }
+};
+
 const AllProblems = () => {
   const [quetions, setQuetions] = useState([]);
-  const [filtered,setFiltered] = useState([]);
-  const [query,setQuery] = useState("");
+  const [query, setQuery] = useState("");
+  const [diff, setDifficulty] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const filterdItems = useMemo(() => {
+    return quetions.filter((quetion) => {
+      return quetion.title.toLowerCase().includes(query.toLowerCase());
+    });
+  }, [query, quetions]);
+
+  const easyQuetions = useMemo(() => {
+    return  filterdItems.filter((quetion)=>{
+      return quetion.difficulty === "6356152e9184e98272f9906e"
+    })
+  },[filterdItems]);
+
+  const mediumQuetions = useMemo(() => {
+    return  filterdItems.filter((quetion)=>{
+      return quetion.difficulty === "635615679184e98272f99071"
+    })
+  },[filterdItems]);
+
+  const hardQuetions = useMemo(() => {
+    return  filterdItems.filter((quetion)=>{
+      return quetion.difficulty === "635615729184e98272f99074"
+    })
+  },[filterdItems]);
+
 
   const loadQuetions = () => {
     setLoading(true);
@@ -35,28 +72,58 @@ const AllProblems = () => {
       ) : (
         <div className="w-full flex items-center justify-center flex-col">
           <div className="flex items-center gap-10 mt-5">
-            <div className="flex gap-2  border p-3 rounded-full">
-              <svg
-                class="w-6 h-6 text-gray-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                ></path>
-              </svg>
-              <select className="pr-2 text-center text-gray-500 focus: outline-none" name="" id="">
-                <option value="">Difficulty</option>
-                <option value="">Easy</option>
-                <option value="">Medium</option>
-                <option value="">Hard</option>
-              </select>
-            </div>
+            <Link
+              onClick={currentTab("/")}
+              to="/"
+              className={`${
+                active
+                  ? activeCss
+                  : "border rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
+              }`}
+            >
+              <div>
+                <p>All</p>
+              </div>
+            </Link>
+            <Link
+              onClick={currentTab("/easy")}
+              to="/easy"
+              className={`${
+                active
+                  ? activeCss
+                  : "border rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
+              }`}
+            >
+              <div>
+                <p>Easy</p>
+              </div>
+            </Link>
+            <Link
+              onClick={currentTab("/medium")}
+              to="/medium"
+              className={`${
+                active
+                  ? activeCss
+                  : "border rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
+              }`}
+            >
+              <div>
+                <p>Medium</p>
+              </div>
+            </Link>
+            <Link
+              onClick={currentTab("/hard")}
+              to="/hard"
+              className={`${
+                active
+                  ? activeCss
+                  : "border rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
+              }`}
+            >
+              <div>
+                <p>Hard</p>
+              </div>
+            </Link>
 
             <div>
               <div className="border rounded-lg p-3">
@@ -78,16 +145,45 @@ const AllProblems = () => {
                     </svg>
                   </div>
                   <div>
-                    <input className = 'focus : outline-none text-gray-500' type="search" placeholder="Search" />
+                    <input
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      className="focus : outline-none text-gray-500"
+                      type="search"
+                      placeholder="Search"
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="w-screen mt-5">
-            {quetions.map((quetion) => (
-              <Quetion key={quetion._id} solved={false} quetion={quetion} />
-            ))}
+
+            {window.location.pathname === "/" ? (
+              <>
+                {filterdItems.map((quetion) => (
+                  <Quetion key={quetion._id} solved={false} quetion={quetion} />
+                ))}
+              </>
+            ) : window.location.pathname === "/easy" ? (
+              <>
+              {easyQuetions.map((quetion) => (
+                <Quetion key={quetion._id} solved={false} quetion={quetion} />
+              ))}
+            </>
+            ) : window.location.pathname === "/medium" ? (
+              <>
+              {mediumQuetions.map((quetion) => (
+                <Quetion key={quetion._id} solved={false} quetion={quetion} />
+              ))}
+            </>
+            ) : (
+              <>
+                {hardQuetions.map((quetion) => (
+                  <Quetion key={quetion._id} solved={false} quetion={quetion} />
+                ))}
+              </>
+            )}
           </div>
         </div>
       )}
