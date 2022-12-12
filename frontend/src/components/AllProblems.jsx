@@ -78,7 +78,7 @@ const AllProblems = () => {
               className={`${
                 active
                   ? activeCss
-                  : "border rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
+                  : "border hover:border-violet-400 rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
               }`}
             >
               <div>
