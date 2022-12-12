@@ -91,7 +91,7 @@ const AllProblems = () => {
               className={`${
                 active
                   ? activeCss
-                  : "border rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
+                  : "border hover:border-violet-400 rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
               }`}
             >
               <div>
@@ -104,7 +104,7 @@ const AllProblems = () => {
               className={`${
                 active
                   ? activeCss
-                  : "border rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
+                  : "border  hover:border-violet-400  rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
               }`}
             >
               <div>
@@ -117,7 +117,7 @@ const AllProblems = () => {
               className={`${
                 active
                   ? activeCss
-                  : "border rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
+                  : "border  hover:border-violet-400 rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
               }`}
             >
               <div>
@@ -126,7 +126,7 @@ const AllProblems = () => {
             </Link>
 
             <div>
-              <div className="border rounded-lg p-3">
+              <div className="border rounded-lg p-3  hover:border-violet-500 ">
                 <div className="flex gap-3 ">
                   <div className="flex gap-3">
                     <svg
