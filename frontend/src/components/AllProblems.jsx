@@ -5,7 +5,7 @@ import Quetion from "./Quetion";
 
 let active = false;
 let activeCss = "border rounded-full w-[100px] p-2 text-center text-white bg-violet-500 font-bold flex items-center justify-center";
-
+let offCss = "border hover:border-violet-400 rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center";
 const currentTab = (path) => {
   if (window.location.pathname === path) {
     active = true;
@@ -78,7 +78,7 @@ const AllProblems = () => {
               className={`${
                 active
                   ? activeCss
-                  : "border hover:border-violet-400 rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
+                  : offCss
               }`}
             >
               <div>
@@ -91,7 +91,7 @@ const AllProblems = () => {
               className={`${
                 active
                   ? activeCss
-                  : "border hover:border-violet-400 rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
+                  : offCss
               }`}
             >
               <div>
@@ -104,7 +104,7 @@ const AllProblems = () => {
               className={`${
                 active
                   ? activeCss
-                  : "border  hover:border-violet-400  rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
+                  : offCss
               }`}
             >
               <div>
@@ -117,7 +117,7 @@ const AllProblems = () => {
               className={`${
                 active
                   ? activeCss
-                  : "border  hover:border-violet-400 rounded-full w-[100px] p-2 text-center text-gray-600 font-bold flex items-center justify-center"
+                  :offCss
               }`}
             >
               <div>

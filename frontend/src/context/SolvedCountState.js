@@ -4,7 +4,6 @@ import { getAllQuetions, getSolvedQuetions } from "../helper/coreApiCalls";
 import { SolvedCountContext } from "./SolvedCountContext";
 
 export const SolvedCountState = (props) =>{
-    
   const [solved,setSolved] = useState(0);
   const [all,setAll] = useState(0);
   const {user , token} = isAuthenticated();
