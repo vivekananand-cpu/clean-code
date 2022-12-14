@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { SolvedCountContext } from '../context/SolvedCountContext';
 import { isAuthenticated } from '../helper/auth';
 import { getSolvedQuetions } from '../helper/coreApiCalls';
 import Quetion from './Quetion';
 
 const SolvedProblems = () => {
+  const {setSolved} = useContext(SolvedCountContext);
     const [problems,setProblems] = useState([]);
     const {user,token} = isAuthenticated();
     const [reload,setReload] = useState(false);
     const [loading,setLoading] = useState(false);
-    
+
     useEffect(()=>{
         setLoading(true);
         getSolvedQuetions(user._id,token)
@@ -25,7 +27,9 @@ const SolvedProblems = () => {
        
     },[reload, token, user._id]);
 
-  
+  useEffect(()=>{
+    setSolved(problems.length);
+  },[problems])
 
   return (
     <>
@@ -37,7 +41,7 @@ const SolvedProblems = () => {
         ) : (
 
     <div className='w-full flex items-center justify-center'>
-       
+      
        <div className='w-screen'>
        
        {

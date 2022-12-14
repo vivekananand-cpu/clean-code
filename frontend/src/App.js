@@ -1,5 +1,5 @@
 
-import './App.css';
+
 import { Routes, Route } from "react-router-dom";
 import Home from './core/Home';
 import Signup from './user/Signup';
@@ -10,11 +10,12 @@ import AdminRoute from './auth/AdminRoute';
 import UserRoute from './auth/UserRoute';
 import CreateDifficulties from './components/CreateDifficulties';
 import AddProblem from './components/AddProblem';
+import { SolvedCountState } from './context/SolvedCountState';
 
 
 function App() {
   return (
-    <div className="App">
+    <SolvedCountState>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/easy" element={<Home />} />
@@ -27,7 +28,7 @@ function App() {
         <Route path="/admin/add" element={<AdminRoute Child={AddProblem} />} />
         <Route path="/user/solved" element={<UserRoute Child={User} />} />
       </Routes>
-    </div>
+    </SolvedCountState>
   );
 }
 
